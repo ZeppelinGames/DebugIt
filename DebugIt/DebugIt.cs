@@ -118,14 +118,7 @@ public static class DebugIt {
     // <param name> (<param type>): <param value>
     // ...
     public static void LogClass<T>(T gClass) {
-        FieldInfo[] fields = gClass.GetType().GetFields();
-
-        string debugStr = gClass.GetType().Name + NEWLINE;
-        for (int i = 0; i < fields.Length; i++) {
-            debugStr += $"{fields[i].Name} ({fields[i].FieldType.Name}): {fields[i].GetValue(gClass).ToString()} {NEWLINE}";
-        }
-
-        Debug.Log(debugStr);
+        Debug.Log(ClassToString(gClass));
     }
 }
 
