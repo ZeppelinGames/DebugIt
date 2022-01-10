@@ -14,8 +14,6 @@ Current supported types:
 
 It does all primative types (int, string, bool, float, double, etc...), arrays of primative types and classes (int[], string[] float[], double[]), custom-classes (ik, very cool), enums.
 
-It doesnt do arrays of arrays (currently). Dont do anything like int[][], it'll get upset and give you a response of `[][]` :(
-
 Want to debug a thing? Here's how you do it with DebugIt: <br>
 `DebugIt.LogIt(<your really cool variable goes here>);` <br>
 That's it. It'll log the thing. <br>
