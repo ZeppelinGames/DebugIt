@@ -4,7 +4,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-public static class DebugIt {
+// Open source debugging tool by Zeppelin Games under MIT license
+// https://github.com/ZeppelinGames/DebugIt
+
+public class DebugIt {
 
     private static string NEWLINE = "\n";
 
@@ -43,7 +46,16 @@ public static class DebugIt {
         string debugStr = "[";
         if (arr != null) {
             for (int i = 0; i < arr.Length; i++) {
-                debugStr += AnyToString(arr[i]) + (i < arr.Length - 1 ? ", " : "");
+                if (typeof(T).IsArray) {
+                    MethodInfo arrayToStrMethod = typeof(DebugIt).GetMethod("ArrayToString", BindingFlags.Static | BindingFlags.NonPublic);
+                    arrayToStrMethod = arrayToStrMethod.MakeGenericMethod(typeof(T).GetElementType());
+                    object arrayToStringObj = arrayToStrMethod.Invoke(null, new object[] { arr[i] });
+
+                    debugStr += arrayToStringObj.ToString();
+                } else {
+                    debugStr += AnyToString(arr[i]);
+                }
+                debugStr += (i < arr.Length - 1 ? ", " : "");
             }
         }
         debugStr += "]";
